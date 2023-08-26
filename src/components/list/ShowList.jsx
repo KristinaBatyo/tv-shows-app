@@ -10,6 +10,7 @@ import {
   ShowImage,
   ShowTitle,
   ShowRating,
+  List,
 } from "./ShowList.styled";
 
 function ShowList() {
@@ -47,7 +48,7 @@ function ShowList() {
             {searchResults.length === 0 ? (
               <Message>Sorry, nothing found with this search</Message>
             ) : (
-              <ul>
+              <List>
                 {searchResults.map((result) => (
                   <ShowItem key={result.show.id}>
                     <ShowLink to={`/details/${result.show.id}`}>
@@ -64,7 +65,7 @@ function ShowList() {
                     </ShowLink>
                   </ShowItem>
                 ))}
-              </ul>
+              </List>
             )}
           </ShowListContainer>
         )}

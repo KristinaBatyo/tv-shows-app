@@ -25,6 +25,9 @@ export const Message = styled.p`
 export const ShowListContainer = styled.div`
   margin-top: 20px;
 `;
+export const List = styled.ul`
+  list-style: none;
+`;
 
 export const ShowItem = styled.li`
   margin-bottom: 20px;
