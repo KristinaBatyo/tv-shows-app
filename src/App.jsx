@@ -4,12 +4,10 @@ import ShowDetails from "./components/details/ShowDetails";
 
 function App() {
   return (
-    <>
       <Routes>
         <Route path="/" element={<ShowList />} />
         <Route path="/details/:showId" element={<ShowDetails />} />
       </Routes>
-    </>
   );
 }
 

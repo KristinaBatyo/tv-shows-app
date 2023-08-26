@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import {
+  Container,
+  BackLink,
+  ShowImage,
+  ShowName,
+  Genres,
+  LinkToShow,
+  Paragraph,
+} from "./ShowDetails.styled";
 
 function ShowDetails() {
   const { showId } = useParams();
@@ -22,27 +31,26 @@ function ShowDetails() {
       }
 
   return (
-    <div>
-      <Link to="/">Back to Show List</Link>
-      <img
+    <Container>
+      <BackLink to="/">Back to Show List</BackLink>
+      <ShowImage
         src={show.image ? show.image.medium : ""}
         alt={show.name}
-        style={{ height: "30vh" }}
       />
-      <h2>{show.name}</h2>
-      <p>Genres: {show.genres.join(", ")}</p>
-      <p>Rating: {show.rating.average || "N/A"}</p>
-      <p>
-        <a href={show.officialSite} target="_blank" rel="noopener noreferrer">
+      <ShowName>{show.name}</ShowName>
+      <Genres>Genres: {show.genres.join(", ")}</Genres>
+      <Paragraph>Rating: {show.rating.average || "N/A"}</Paragraph>
+      <Paragraph>
+        <LinkToShow href={show.officialSite} target="_blank" rel="noopener noreferrer">
           Link to show
-        </a>
-      </p>
-      <p>Status: {show.status}</p>
-      <p>
+        </LinkToShow>
+      </Paragraph>
+      <Paragraph>Status: {show.status}</Paragraph>
+      <Paragraph>
         Schedule: {show.schedule.days.join(", ")} at {show.schedule.time}
-      </p>
-      <p>Summary: {show.summary}</p>
-    </div>
+      </Paragraph>
+      <Paragraph>Summary: {show.summary}</Paragraph>
+    </Container>
   );
 }
 

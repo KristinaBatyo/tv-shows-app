@@ -1,6 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import {
+  SearchContainer,
+  SearchInput,
+  Message,
+  ShowListContainer,
+  ShowItem,
+  ShowLink,
+  ShowImage,
+  ShowTitle,
+  ShowRating,
+} from "./ShowList.styled";
 
 function ShowList() {
     const [searchText, setSearchText] = useState("");
@@ -24,37 +34,43 @@ function ShowList() {
 
 
   return (
-    <div>
-      <input
-        value={searchText}
-        onChange={(e) => setSearchText(e.target.value)}
-      />
-      {searchText.length < 2 ? (
-        <p>Type the show's name</p>
-      ) : (
-        <div>
-          {searchResults.length === 0 ? (
-            <p>Sorry, nothing found with this search</p>
-          ) : (
-            <ul>
-              {searchResults.map((result) => (
-                <li key={result.show.id}>
-                  <Link to={`/details/${result.show.id}`}>
-                    <img
-                      src={result.show.image ? result.show.image.medium : ""}
-                      alt={result.show.name}
-                    />
-                    <h3>{result.show.name}</h3>
-                    <p>Rating: {result.show.rating.average || "N/A"}</p>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-      )}
-    </div>
+      <SearchContainer>
+        <SearchInput
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+          placeholder="Search for a show..."
+        />
+        {searchText.length < 2 ? (
+          <Message>Type the show's name</Message>
+        ) : (
+          <ShowListContainer>
+            {searchResults.length === 0 ? (
+              <Message>Sorry, nothing found with this search</Message>
+            ) : (
+              <ul>
+                {searchResults.map((result) => (
+                  <ShowItem key={result.show.id}>
+                    <ShowLink to={`/details/${result.show.id}`}>
+                      <ShowImage
+                        src={result.show.image ? result.show.image.medium : ""}
+                        alt={result.show.name}
+                      />
+                      <div>
+                        <ShowTitle>{result.show.name}</ShowTitle>
+                        <ShowRating>
+                          Rating: {result.show.rating.average || "N/A"}
+                        </ShowRating>
+                      </div>
+                    </ShowLink>
+                  </ShowItem>
+                ))}
+              </ul>
+            )}
+          </ShowListContainer>
+        )}
+      </SearchContainer>
   );
+
 }
 
 export default ShowList;
