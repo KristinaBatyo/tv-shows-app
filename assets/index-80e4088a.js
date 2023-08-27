@@ -296,6 +296,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
   &:hover {
     background-color: #4fa2d1;
     border-color: #4fa2d1;
+    color: rgb(237, 247, 237);
   }
 `,q_=de.img`
   height: 30vh;
