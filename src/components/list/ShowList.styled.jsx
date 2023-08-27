@@ -25,6 +25,7 @@ export const StyledTextField = styled(TextField)`
 
   & .MuiOutlinedInput-root {
     background-color: rgb(237, 247, 237);
+    color: #18333e;
   }
 
   & .MuiInputLabel-root {
@@ -37,7 +38,6 @@ export const StyledTextField = styled(TextField)`
 
   & .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
     border-color: #18333e;
-    background-color: white;
   }
 `;
 
