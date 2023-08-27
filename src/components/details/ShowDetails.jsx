@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import parse from "html-react-parser";
 import {
   Container,
   BackLink,
@@ -9,7 +10,14 @@ import {
   Genres,
   LinkToShow,
   Paragraph,
+  BlurredImage,
+  ContentWrapper,
+  ShowRating,
+  RatingContainer,
+  SummaryContainer,
+  SummaryParagraph,
 } from "./ShowDetails.styled";
+import { Rating } from "@mui/material";
 
 function ShowDetails() {
   const { showId } = useParams();
@@ -31,25 +39,42 @@ function ShowDetails() {
       }
 
   return (
-    <Container>
+    <Container backgroundImage={show.image ? show.image.original : ""}>
+      <BlurredImage backgroundImage={show.image ? show.image.original : ""} />
       <BackLink to="/">Back to Show List</BackLink>
-      <ShowImage
-        src={show.image ? show.image.medium : ""}
-        alt={show.name}
-      />
-      <ShowName>{show.name}</ShowName>
-      <Genres>Genres: {show.genres.join(", ")}</Genres>
-      <Paragraph>Rating: {show.rating.average || "N/A"}</Paragraph>
-      <Paragraph>
-        <LinkToShow href={show.officialSite} target="_blank" rel="noopener noreferrer">
-          Link to show
-        </LinkToShow>
-      </Paragraph>
-      <Paragraph>Status: {show.status}</Paragraph>
-      <Paragraph>
-        Schedule: {show.schedule.days.join(", ")} at {show.schedule.time}
-      </Paragraph>
-      <Paragraph>Summary: {show.summary}</Paragraph>
+      <ContentWrapper>
+        <ShowImage src={show.image ? show.image.medium : ""} alt={show.name} />
+        <ShowName>{show.name}</ShowName>
+        <Genres>Genres: {show.genres.join(", ")}</Genres>
+        <RatingContainer>
+          <Rating
+            name="read-only"
+            value={show.rating.average}
+            max={10}
+            precision={0.5}
+            readOnly
+          />
+          <ShowRating>{show.rating.average}</ShowRating>
+        </RatingContainer>
+        <Paragraph>
+          <LinkToShow
+            href={show.officialSite}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Link to show
+          </LinkToShow>
+        </Paragraph>
+        <Paragraph> Status: {show.status}</Paragraph>
+        <Paragraph>
+          Schedule: {show.schedule.days.join(", ")} at {show.schedule.time}
+        </Paragraph>
+        <SummaryContainer>
+          <SummaryParagraph>Summary:</SummaryParagraph>
+          {parse(`${show.summary}
+  `)}
+        </SummaryContainer>
+      </ContentWrapper>
     </Container>
   );
 }
