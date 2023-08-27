@@ -49,6 +49,7 @@ export const BackLink = styled(Link)`
   &:hover {
     background-color: #4fa2d1;
     border-color: #4fa2d1;
+    color: rgb(237, 247, 237);
   }
 `;
 
