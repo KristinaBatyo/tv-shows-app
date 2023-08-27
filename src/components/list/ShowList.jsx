@@ -11,10 +11,9 @@ import {
   List,
   RatingContainer,
   StyledTextField,
-  FullScreenAlert,
-  FullScreenText,
 } from "./ShowList.styled";
-import { Alert, Paper, Rating } from "@mui/material";
+import { Alert, Paper, Rating, } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 
 function ShowList() {
   const [searchText, setSearchText] = useState("");
@@ -40,62 +39,61 @@ function ShowList() {
     <SearchContainer>
       <StyledTextField
         id="outlined-basic"
-        label="Search for a show..."
+        label={
+          searchText.length <= 2 ? (
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <SearchIcon style={{ marginRight: "5px" }} />
+              Search for a show...
+            </div>
+          ) : null
+        }
         value={searchText}
         onChange={(e) => setSearchText(e.target.value)}
       />
-      {searchText.length < 2 ? (
-        <FullScreenText>
-          <FullScreenAlert icon={false} severity="success">
-            Type the show's name
-          </FullScreenAlert>
-        </FullScreenText>
-      ) : (
-        <ShowListContainer>
-          {searchResults.length === 0 ? (
-            <Alert severity="info">Sorry, nothing found with this search</Alert>
-          ) : (
-            <List>
-              {searchResults.map((result) => (
-                <ShowItem key={result.show.id}>
-                  <Paper
-                    sx={{
-                      p: 2,
-                      margin: "auto",
-                      maxWidth: 500,
-                      flexGrow: 1,
-                      backgroundColor: (theme) =>
-                        theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-                    }}
-                  >
-                    <ShowLink to={`/details/${result.show.id}`}>
-                      <ShowImage
-                        src={result.show.image ? result.show.image.medium : ""}
-                        alt={result.show.name}
-                      />
-                      <div>
-                        <ShowTitle>{result.show.name}</ShowTitle>
-                      </div>
-                    </ShowLink>
-                    <RatingContainer>
-                      <Rating
-                        name="size-small"
-                        defaultValue={2}
-                        size="small"
-                        value={result.show.rating.average}
-                        max={10}
-                        precision={0.5}
-                        readOnly
-                      />
-                      <ShowRating>{result.show.rating.average}</ShowRating>
-                    </RatingContainer>
-                  </Paper>
-                </ShowItem>
-              ))}
-            </List>
-          )}
-        </ShowListContainer>
-      )}
+      <ShowListContainer>
+        {searchResults.length === 0 && searchText.length >= 2 ? (
+          <Alert severity="info">Sorry, nothing found with this search</Alert>
+        ) : (
+          <List>
+            {searchResults.map((result) => (
+              <ShowItem key={result.show.id}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    margin: "auto",
+                    maxWidth: 500,
+                    flexGrow: 1,
+                    backgroundColor: (theme) =>
+                      theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+                  }}
+                >
+                  <ShowLink to={`/details/${result.show.id}`}>
+                    <ShowImage
+                      src={result.show.image ? result.show.image.medium : ""}
+                      alt={result.show.name}
+                    />
+                    <div>
+                      <ShowTitle>{result.show.name}</ShowTitle>
+                    </div>
+                  </ShowLink>
+                  <RatingContainer>
+                    <Rating
+                      name="size-small"
+                      defaultValue={2}
+                      size="small"
+                      value={result.show.rating.average}
+                      max={10}
+                      precision={0.5}
+                      readOnly
+                    />
+                    <ShowRating>{result.show.rating.average}</ShowRating>
+                  </RatingContainer>
+                </Paper>
+              </ShowItem>
+            ))}
+          </List>
+        )}
+      </ShowListContainer>
     </SearchContainer>
   );
 }

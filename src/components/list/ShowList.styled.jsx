@@ -6,14 +6,7 @@ import { Alert } from "@mui/material";
 
 export const FullScreenAlert = styled(Alert)`
   min-width: 200px;
-  background-color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-export const FullScreenText = styled.div`
-  max-width: 100%;
-  max-height: 100%;
+  background-color: rgba(255, 255, 255, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,20 +19,26 @@ export const StyledTextField = styled(TextField)`
   min-width: 80vw;
 
   & .MuiOutlinedInput-root {
-    background-color: rgb(237, 247, 237);
-    color: #18333e;
+    color: white;
+    & .MuiOutlinedInput-notchedOutline {
+      border-color: white;
+    }
+  }
+
+  & .MuiOutlinedInput-root {
+    color: white;
   }
 
   & .MuiInputLabel-root {
-    color: #18333e;
+    color: rgb(70, 70, 32);
   }
 
   & .MuiInputLabel-root.Mui-focused {
-    color: #18333e;
+    color: white;
   }
 
   & .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
-    border-color: #18333e;
+    border-color: white;
   }
 `;
 
@@ -63,18 +62,20 @@ export const RatingContainer = styled.div`
 `;
 export const List = styled.ul`
   list-style: none;
-  background-color: rgb(237, 247, 237);
   margin: 0px;
   padding: 15px;
+  @media (min-width: 768px) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
 `;
 
 export const ShowItem = styled.li`
-  white-space: nowrap;
-  &:not(:last-child) {
-    margin-bottom: 20px;
-  }
-  @media (max-width: 768px) {
-    max-width: 100%; 
+  margin-bottom: 20px;
+  @media (min-width: 768px) {
+    max-width: 100%;
+    margin-bottom: 0px;
   }
 `;
 
@@ -95,7 +96,8 @@ export const ShowImage = styled.img`
 export const ShowTitle = styled.h3`
   font-size: 18px;
   margin: 0;
-  @media (max-width: 768px) {
+  white-space: normal;
+   @media (max-width: 768px) {
     font-size: 12px;
   }
 `;

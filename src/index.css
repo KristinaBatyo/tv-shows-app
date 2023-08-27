@@ -12,6 +12,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+   background-image: url("./images/movie.webp");
+  background-size: cover; /* Щоб зображення заповнювало весь фон */
+  background-repeat: no-repeat; /* Щоб зображення не повторювалося */
 }
 
 a {
