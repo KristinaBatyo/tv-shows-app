@@ -14,7 +14,7 @@ import {
   FullScreenAlert,
   FullScreenText,
 } from "./ShowList.styled";
-import { Alert, Container, Paper, Rating, TextField } from "@mui/material";
+import { Alert, Container, Paper, Rating, } from "@mui/material";
 
 function ShowList() {
   const [searchText, setSearchText] = useState("");
